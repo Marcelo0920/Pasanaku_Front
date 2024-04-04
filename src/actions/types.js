@@ -4,3 +4,11 @@ export const POST_JUGADOR_SUCCESS = "POST_JUGADOR_SUCCESS";
 export const DELETE_JUGADOR = "DELETE_JUGADOR";
 export const UPDATE_JUGADOR = "UPDATE_JUGADOR";
 export const JUGADOR_ERROR = "JUGADOR_ERROR";
+
+export const CREAR_JUEGO = "CREAR_JUEGO";
+export const POST_JUEGO_SUCCESS = "POST_JUEGO_SUCCESS";
+export const GET_JUEGO = "GET_JUEGO";
+export const GET_JUEGOS = "GET_JUEGOS";
+export const UPDATE_JUEGO = "UPDATE_JUEGO";
+export const DELETE_JUEGO = "DELETE_JUEGO";
+export const JUEGO_ERROR = "JUEGO_ERROR";

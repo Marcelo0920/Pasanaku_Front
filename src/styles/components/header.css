@@ -1,0 +1,27 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+}
+
+h1 {
+  font-family: "Inter", sans-serif;
+  color: white;
+}
+
+.nav {
+  display: flex;
+}
+
+.nav svg {
+  color: white;
+  font-size: 25px;
+  margin: auto auto;
+}
+
+.profile-pic {
+  background-color: pink;
+  border-radius: 100px;
+  padding: 10px;
+  height: 3px;
+  margin: auto auto;
+}

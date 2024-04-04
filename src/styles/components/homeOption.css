@@ -1,0 +1,30 @@
+.home-option {
+  width: 294px;
+  height: 207px;
+  border-radius: 20px;
+  background: rgb(177, 157, 209);
+  background: linear-gradient(
+    86deg,
+    rgba(177, 157, 209, 0.24648116082370453) 0%,
+    rgba(193, 199, 228, 0.2548845221682423) 97%
+  );
+
+  transition: all 0.2s ease-in-out;
+}
+
+.home-option:hover {
+  transform: scale(1.1);
+}
+
+.home-option-image {
+  height: 85%;
+  width: 100%;
+  border-radius: 20px 20px 0px 0px;
+}
+
+.home-option-text {
+  text-align: center;
+  color: white;
+  margin: auto auto;
+  font-family: "Inter", sans-serif;
+}

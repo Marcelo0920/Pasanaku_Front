@@ -1,0 +1,39 @@
+html {
+  box-sizing: border-box;
+  background: rgb(79, 61, 107);
+  background: linear-gradient(
+    59deg,
+    rgba(79, 61, 107, 1) 0%,
+    rgba(76, 42, 132, 1) 35%,
+    rgba(147, 104, 217, 1) 100%
+  );
+}
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+h2 {
+  font-family: "Inter", sans-serif;
+}
+
+input {
+  font-family: "Inter", sans-serif;
+}
+
+label {
+  font-family: "Inter", sans-serif;
+}
+.section-game {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin-top: 100px;
+}
+
+a {
+  text-decoration: none;
+}
+
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap");

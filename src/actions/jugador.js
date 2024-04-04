@@ -7,6 +7,8 @@ import {
   POST_JUGADOR_SUCCESS,
   DELETE_JUGADOR,
   UPDATE_JUGADOR,
+  GET_JUEGOS,
+  JUEGO_ERROR,
 } from "./types";
 
 export const register = (email, password) => async (dispatch) => {
@@ -15,8 +17,6 @@ export const register = (email, password) => async (dispatch) => {
       "Content-Type": "application/json",
     },
   };
-
-  console.log("acaaaaa");
 
   const body = JSON.stringify({ email, password });
 
