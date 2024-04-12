@@ -1,0 +1,46 @@
+.game-bubble {
+  width: 460px;
+  height: 140px;
+  border-radius: 20px;
+  background: rgb(177, 157, 209);
+  background: linear-gradient(
+    86deg,
+    rgba(177, 157, 209, 0.24648116082370453) 0%,
+    rgba(193, 199, 228, 0.2548845221682423) 97%
+  );
+
+  transition: all 0.2s ease-in-out;
+
+  display: flex;
+  align-items: center;
+  padding: 10px 15px;
+}
+
+.game-bubble:hover {
+  cursor: pointer;
+  transform: scale(1.1);
+}
+
+.game-bubble img {
+  height: 90%;
+  width: 45%;
+  margin-right: 15px;
+}
+
+.game-title {
+  color: white;
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
+}
+
+.game-bubble-stats {
+  display: flex;
+  align-items: center;
+  color: white;
+  font-family: "Inter", sans-serif;
+  font-weight: 300;
+}
+
+.game-bubble-stats p {
+  margin-left: 12px;
+}

@@ -7,6 +7,7 @@ import SignUp from "./pages/SignUp";
 import MyGames from "./pages/MyGames";
 import GamesHistory from "./pages/GamesHistory";
 import GameConfiguration from "./pages/GameConfiguration";
+import GameConfigurationItem from "./pages/GameConfigurationItem";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Route path="/misjuegos" element={<MyGames />} />
         <Route path="/historialpartidas" element={<GamesHistory />} />
         <Route path="/configuracionjuegos" element={<GameConfiguration />} />
+        <Route path="/juego/:id" element={<GameConfigurationItem />} />
       </Routes>
     </BrowserRouter>
   );

@@ -1,21 +1,28 @@
 import React from "react";
 
-const GameBubble = () => {
+import image from "../assets/game2.jpg";
+import { FaRegUser } from "react-icons/fa";
+
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+
+import "../styles/components/gameBubble.css";
+
+const GameBubble = ({ juego }) => {
   return (
-    <div>
-      <h2>Configuracion de Juegos</h2>
+    <div className="game-bubble">
+      <img src={image} />
       <div>
-        <img />
-        <div>
-          <h4>Grupo Universidad</h4>
-          <div>
-            <div></div>
-            <p>8</p>
-          </div>
+        <h4 className="game-title">{juego.nombre}</h4>
+        <div className="game-bubble-stats">
+          <FaRegUser />
+          <p>8</p>
         </div>
       </div>
     </div>
   );
 };
 
-export default GameBubble;
+const mapStateToProps = (state) => ({});
+
+export default connect(mapStateToProps, {})(GameBubble);

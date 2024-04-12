@@ -1,0 +1,19 @@
+.game-configuration {
+  margin: 0 auto;
+  width: 85%;
+}
+
+.game-configuration h2 {
+  color: white;
+}
+
+.game-configuration-bubble {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin: 40px 30px;
+}
+
+.game-configuration-bubble > * {
+  margin: 30px 0px 0px 0px;
+}

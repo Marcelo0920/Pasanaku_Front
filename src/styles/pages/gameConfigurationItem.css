@@ -1,0 +1,120 @@
+.game-configuration-item {
+  margin: auto auto;
+  width: 80%;
+}
+
+.game-configuration-item h2 {
+  color: white;
+}
+
+.game-configuration-content {
+  display: flex;
+  justify-content: space-between;
+  color: white;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.currency-monto {
+  display: flex;
+  margin-bottom: 25px;
+  border: 1px solid #d0d5dd;
+  border-radius: 20px;
+  background-color: white;
+}
+
+.margin-20 {
+  margin: 20px;
+}
+
+.player-item {
+  width: 341px;
+  height: 46px;
+  border-radius: 20px;
+  background: rgb(177, 157, 209);
+  background: linear-gradient(
+    86deg,
+    rgba(177, 157, 209, 0.24648116082370453) 0%,
+    rgba(193, 199, 228, 0.2548845221682423) 97%
+  );
+
+  margin-top: 15px;
+  display: flex;
+  padding: 15px;
+
+  justify-content: space-between;
+  align-items: center;
+}
+
+.player-options {
+  display: flex;
+}
+
+.player-item p {
+  font-size: 14px;
+}
+
+.player-options p {
+  font-size: 12px;
+  font-weight: 300;
+  text-wrap: wrap;
+  margin-left: 10px;
+}
+
+.player-options button {
+  background-color: #6d34c8;
+  display: flex;
+  margin: 1em auto;
+  border-radius: 20px;
+  color: white;
+  border: none;
+  font-size: 8px;
+  font-family: "Inter", sans-serif;
+  padding: 1px;
+}
+
+.player-list {
+  margin-top: 40px;
+  color: white;
+  font-family: "Inter", sans-serif;
+}
+
+.send-button {
+  background-color: #6d34c8;
+  display: flex;
+  margin: 0 auto;
+  border-radius: 20px;
+  color: white;
+  border: none;
+  font-size: 15px;
+  font-family: "Inter", sans-serif;
+  padding: 10px;
+}
+
+.player-wrap {
+  padding: 20px;
+}
+
+.player-delete {
+  color: red;
+  font-weight: 500;
+}
+
+.send-button {
+  background-color: #6d34c8;
+  display: flex;
+  margin: 3em auto;
+  padding: 13px 25px;
+  border-radius: 20px;
+  color: white;
+  border: none;
+  font-size: 15px;
+  font-family: "Inter", sans-serif;
+}
+
+.send-button:hover {
+  cursor: pointer;
+}

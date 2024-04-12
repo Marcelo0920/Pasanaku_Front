@@ -7,14 +7,15 @@ const SignUp = ({ register }) => {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
+    nombre: "",
   });
 
-  const { email, password } = formData;
+  const { nombre, email, password } = formData;
 
   const onSubmit = async (e) => {
     e.preventDefault();
     console.log(email);
-    register({ email, password });
+    register({ nombre, email, password });
   };
 
   const onChange = (e) =>
@@ -27,6 +28,12 @@ const SignUp = ({ register }) => {
         type="email"
         value={email}
         name="email"
+        onChange={(e) => onChange(e)}
+      />
+      <input
+        placeholder="nombre"
+        value={nombre}
+        name="nombre"
         onChange={(e) => onChange(e)}
       />
       <input

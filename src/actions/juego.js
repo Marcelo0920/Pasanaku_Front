@@ -8,18 +8,29 @@ import {
 } from "./types";
 
 export const createGame =
-  (nombre, moneda, monto_total, fecha_inicio) => async (dispatch) => {
+  (nombre, moneda, monto_total, fecha_inicio, frecuencia) =>
+  async (dispatch) => {
     const config = {
       headers: {
         "Content-Type": "application/json",
       },
     };
 
-    const body = JSON.stringify({ nombre, moneda, monto_total, fecha_inicio });
+    monto_total = Number(monto_total);
+
+    const body = JSON.stringify({
+      nombre,
+      moneda,
+      monto_total,
+      fecha_inicio,
+      frecuencia,
+    });
+
+    console.log(body);
 
     try {
       const { data } = await axios.post(
-        "http://localhost:3000/api/jugadores",
+        "https://back-pasanaku.onrender.com/api/jugadores/1/juegos",
         body,
         config
       );
@@ -41,21 +52,20 @@ export const createGame =
 //GET JUEGOS
 export const getJuegos = () => async (dispatch) => {
   try {
-    const res = await axios.get("http://localhost:3000/api/jugadores");
+    const res = await axios.get(
+      "https://back-pasanaku.onrender.com/api/jugadores/1/juegos"
+    );
 
-    console.log(res);
+    console.log(res.data.data);
 
     dispatch({
       type: GET_JUEGOS,
-      payload: res.data,
+      payload: res.data.data,
     });
   } catch (error) {
     dispatch({
       type: JUEGO_ERROR,
-      payload: {
-        msg: error.response.statusText,
-        status: error.response.status,
-      },
+      payload: error,
     });
   }
 };

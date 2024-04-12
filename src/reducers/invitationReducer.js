@@ -1,47 +1,44 @@
 import {
-  GET_JUEGO,
-  GET_JUEGOS,
-  POST_JUEGO_SUCCESS,
-  JUEGO_ERROR,
+  CREAR_INVITADO,
+  GET_INVITADOS,
+  GET_INVITATION,
+  GET_INVITATIONS,
+  INVITATION_ERROR,
+  POST_INVITATION_SUCCESS,
 } from "../actions/types";
 
 const initialState = {
-  juegos: [],
+  invitaciones: [],
+  invitados: [],
   error: {},
   loading: true,
-  juego: null,
 };
 
 export default function (state = initialState, action) {
   const { type, payload } = action;
 
   switch (type) {
-    case GET_JUEGO:
+    case POST_INVITATION_SUCCESS:
       return {
         ...state,
-        juego: payload,
-        loading: false,
-      };
-    case GET_JUEGOS:
-      return {
-        ...state,
-        juegos: payload,
-        loading: false,
-      };
-    case POST_JUEGO_SUCCESS:
-      return {
-        ...state,
-        loading: false,
-      };
-    case JUEGO_ERROR:
-      return {
-        ...state,
-        error: payload,
         loading: false,
       };
 
     default: {
       return state;
     }
+
+    case CREAR_INVITADO:
+      return {
+        ...state,
+        loading: false,
+      };
+
+    case GET_INVITADOS:
+      return {
+        ...state,
+        invitados: payload,
+        loading: false,
+      };
   }
 }

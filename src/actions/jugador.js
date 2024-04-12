@@ -11,20 +11,20 @@ import {
   JUEGO_ERROR,
 } from "./types";
 
-export const register = (email, password) => async (dispatch) => {
+export const register = (nombre, email, password) => async (dispatch) => {
   const config = {
     headers: {
       "Content-Type": "application/json",
     },
   };
 
-  const body = JSON.stringify({ email, password });
+  const body = JSON.stringify({ nombre, email, password });
 
   console.log(body);
 
   try {
     const { data } = await axios.post(
-      "http://localhost:3000/api/jugadores",
+      "https://back-pasanaku.onrender.com/api/jugadores",
       body,
       config
     );
