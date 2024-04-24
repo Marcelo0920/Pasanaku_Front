@@ -64,5 +64,14 @@ a {
 }
 
 .margin-bottom-25 {
-  margin-bottom: 25px;
+  margin-bottom: 12px;
+}
+
+.width-85 {
+  margin: 0 auto;
+  width: 85%;
+}
+
+.h3-title {
+  text-align: center;
 }

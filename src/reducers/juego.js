@@ -31,7 +31,7 @@ export default function (state = initialState, action) {
     case POST_JUEGO_SUCCESS:
       return {
         ...state,
-        articulo: [payload, ...state.juegos],
+        juego: [payload, ...state.juegos],
         loading: false,
       };
     case JUEGO_ERROR:

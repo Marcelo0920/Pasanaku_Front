@@ -3,30 +3,39 @@ import { connect } from "react-redux";
 import { obtenerInvitados } from "../actions/invitacion";
 import { crearInvitado } from "../actions/invitacion";
 import { sendInvitation } from "../actions/invitacion";
+import { updateGame } from "../actions/juego";
+import { startGame } from "../actions/juego";
 import PropTypes from "prop-types";
 
 import "../styles/pages/gameConfigurationItem.css";
 import Invitado from "../components/Invitado";
+import GuestsList from "../components/modals/GuestsList";
 
 const GameConfigurationItem = ({
   crearInvitado,
   obtenerInvitados,
   sendInvitation,
+  updateGame,
+  startGame,
   invitationReducer: { invitados, loading },
 }) => {
   const [moneda, setMoneda] = useState("");
   const [nombre, setNombre] = useState("");
   const [monto_total, setMonto_total] = useState(0);
   const [fecha_inicio, setFecha_inicio] = useState("");
-  const [frecuencia, setFrecuencia] = useState("");
-
-  const [invitedUser, setInvitedUser] = useState("");
-  const [invitedUserPhone, setInvitedUserPhone] = useState("");
-  const [invitedUserName, setInvitedUserName] = useState("");
+  const [frecuencia, setFrecuencia] = useState(0);
+  const [tiempoPuja, setTiempoPuja] = useState(0);
 
   const [invitadosList, setInvitadosList] = useState([]);
 
   let id = window.location.pathname.split("/");
+
+  const [openModal, setOpenModal] = useState(false);
+
+  function handleModal() {
+    console.log("click");
+    setOpenModal(!openModal);
+  }
 
   useEffect(() => {
     obtenerInvitados(id[2]);
@@ -35,25 +44,59 @@ const GameConfigurationItem = ({
   useEffect(() => {
     // Esto se ejecutará cada vez que invitados cambie
     const newInvitadosList = invitados.map((invitado) => ({
-      id: Number(invitado.id),
+      id: Number(invitado.id_invitado),
     }));
     setInvitadosList(newInvitadosList);
   }, [invitados]);
 
   return (
-    <div className="game-configuration-item">
-      <h2>Configuracion de Juego</h2>
-      <div className="game-configuration-content">
-        <div>
-          <div className="flex-column margin-20">
-            <label>Nombre del Juego</label>
-            <input className="game-input" placeholder="Mi partida asombrosa" />
-          </div>
+    <>
+      <GuestsList
+        open={openModal}
+        id={id[2]}
+        onClose={() => setOpenModal(false)}
+      />
+      <div className="game-configuration-item">
+        <h2>Configuracion de Juego</h2>
+        <div className="game-configuration-content">
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
 
-          <div className="margin-20">
-            <label>Monto</label>
-            <div className="currency-monto">
-              <select
+              updateGame(
+                nombre,
+                /* moneda, */
+                monto_total,
+                fecha_inicio,
+                frecuencia,
+                tiempoPuja,
+                id[2]
+              );
+
+              setMoneda("");
+              setNombre("");
+              setMonto_total(0);
+              setFecha_inicio("");
+              setFrecuencia("");
+              setTiempoPuja(0);
+            }}
+          >
+            <div className="flex-column margin-20">
+              <label>Nombre del Juego</label>
+              <input
+                className="game-input"
+                placeholder="Mi partida asombrosa"
+                value={nombre}
+                onChange={(e) => {
+                  setNombre(e.target.value);
+                }}
+              />
+            </div>
+
+            <div className="margin-20">
+              <label>Monto</label>
+              <div className="currency-monto">
+                {/* <select
                 name="currency"
                 className="currency"
                 onChange={(e) => {
@@ -65,115 +108,104 @@ const GameConfigurationItem = ({
                 </option>
                 <option value="bs">BOL</option>
                 <option value="usa">USA</option>
-              </select>
+              </select> */}
+                <input
+                  type="number"
+                  placeholder="456"
+                  value={monto_total}
+                  onChange={(e) => {
+                    setMonto_total(e.target.value);
+                  }}
+                />
+              </div>
+            </div>
+
+            <div className="column-align  margin-20">
+              <label>Frecuencia del Juego</label>
               <input
+                name="frecuencia"
+                className="frecuencia game-input"
                 type="number"
-                placeholder="456"
+                placeholder="10"
                 onChange={(e) => {
-                  setMonto_total(e.target.value);
+                  setFrecuencia(e.target.value);
                 }}
               />
-            </div>
-          </div>
-
-          <div className="column-align  margin-20">
-            <label>Frecuencia del Juego</label>
-            <select
-              name="frecuencia"
-              className="frecuencia game-input"
-              onChange={(e) => {
-                setFrecuencia(e.target.value);
-              }}
-            >
-              <option>Semanalmente</option>
+              {/* <option>Semanalmente</option>
               <option>Mensualmente</option>
               <option>Cada 5 días</option>
-            </select>
-          </div>
+            </select> */}
+            </div>
 
-          <div className="column-align  margin-20">
-            <label>Fecha de Inicio</label>
-            <input
-              type="date"
-              className="game-input"
-              onChange={(e) => {
-                setFecha_inicio(e.target.value);
-              }}
-            />
-          </div>
-        </div>
-
-        <div>
-          <form
-            onSubmit={(e) => {
-              e.preventDefault();
-              crearInvitado(
-                invitedUser,
-                invitedUserName,
-                invitedUserPhone,
-                id[2]
-              );
-              setInvitedUser("");
-              setInvitedUserPhone("");
-            }}
-          >
-            <div className="flex-column  margin-20">
-              <label>Crear Invitados</label>
+            <div className="column-align  margin-20">
+              <label>Fecha de Inicio</label>
               <input
+                type="date"
                 className="game-input"
-                placeholder="Email"
-                value={invitedUser}
                 onChange={(e) => {
-                  setInvitedUser(e.target.value);
+                  setFecha_inicio(e.target.value);
                 }}
               />
             </div>
 
-            <div className="flex-column  margin-20">
+            <div className="column-align ">
+              <label>Tiempo para la puja</label>
               <input
-                className="game-input"
-                placeholder="Nombre"
-                value={invitedUserName}
+                name="tiempo_puja"
+                className="frecuencia game-input"
+                value={tiempoPuja}
+                type="number"
+                placeholder="10"
                 onChange={(e) => {
-                  setInvitedUserName(e.target.value);
+                  setTiempoPuja(e.target.value);
                 }}
               />
             </div>
-
-            <div className=" margin-20">
-              <input
-                className="game-input"
-                placeholder="Telefono"
-                value={invitedUserPhone}
-                onChange={(e) => {
-                  setInvitedUserPhone(e.target.value);
-                }}
-              />
-            </div>
-
-            <button type="submit" className="send-button">
-              Crear Invitado
-            </button>
           </form>
 
-          <div className="player-list">
-            <label>Jugadores invitados</label>
-            <div className="player-wrap">
-              {invitados.map((invitado) => {
-                return <Invitado key={invitado.id} invitado={invitado} />;
-              })}
+          <div>
+            <div className="player-list">
+              <label>Jugadores invitados</label>
+              <div className="player-wrap">
+                {invitados.map((invitado) => {
+                  return (
+                    <Invitado key={invitado.id_invitado} invitado={invitado} />
+                  );
+                })}
+              </div>
+
+              <h3 className="h3-title">Acciones</h3>
+
+              <div className="flex-row ">
+                <button className="send-button" onClick={(e) => handleModal()}>
+                  Crear Invitado
+                </button>
+
+                <button className="send-button" type="submit">
+                  Actualizar Juego
+                </button>
+
+                <button
+                  onClick={(e) => sendInvitation(invitadosList, id[2])}
+                  className="send-button"
+                >
+                  Enviar Invitaciones
+                </button>
+              </div>
             </div>
-            {console.log(invitadosList)}
-            <button
-              onClick={(e) => sendInvitation(invitadosList, id[2])}
-              className="send-button"
-            >
-              Enviar Invitaciones
-            </button>
           </div>
         </div>
+        <button
+          onClick={(e) => {
+            console.log("clickeado");
+            startGame(id[2]);
+          }}
+          className="send-button"
+        >
+          Empezar Juego
+        </button>
       </div>
-    </div>
+    </>
   );
 };
 
@@ -184,12 +216,14 @@ const mapStateToProps = (state) => ({
 GameConfigurationItem.propTypes = {
   invitationReducer: PropTypes.object.isRequired,
   obtenerInvitados: PropTypes.func.isRequired,
-  crearInvitado: PropTypes.func.isRequired,
   sendInvitation: PropTypes.func.isRequired,
+  updateGame: PropTypes.func.isRequired,
+  startGame: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps, {
   obtenerInvitados,
-  crearInvitado,
+  startGame,
+  updateGame,
   sendInvitation,
 })(GameConfigurationItem);

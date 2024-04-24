@@ -3,7 +3,7 @@ import React from "react";
 const Invitado = ({ invitado }) => {
   return (
     <div className="player-item">
-      <p>{invitado.correo}</p>
+      <p>{invitado.invitado.correo}</p>
       <div className="player-options">
         <button>
           <p>Agregar Invitado</p>

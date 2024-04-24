@@ -13,9 +13,17 @@ const CreateGameModal = ({ open, onClose, createGame }) => {
   const [nombre, setNombre] = useState("");
   const [monto_total, setMonto_total] = useState(0);
   const [fecha_inicio, setFecha_inicio] = useState("");
-  const [frecuencia, setFrecuencia] = useState("");
+  const [frecuencia, setFrecuencia] = useState(0);
+  const [tiempoPuja, setTiempoPuja] = useState(0);
 
-  console.log(nombre, moneda, monto_total, fecha_inicio, frecuencia);
+  console.log(
+    nombre,
+    moneda,
+    monto_total,
+    fecha_inicio,
+    frecuencia,
+    tiempoPuja
+  );
 
   return (
     <div className="overlay">
@@ -27,12 +35,20 @@ const CreateGameModal = ({ open, onClose, createGame }) => {
           className="modalContent"
           onSubmit={(e) => {
             e.preventDefault();
-            createGame(nombre, moneda, monto_total, fecha_inicio, frecuencia);
+            createGame(
+              nombre,
+              /* moneda, */
+              monto_total,
+              fecha_inicio,
+              frecuencia,
+              tiempoPuja
+            );
             setMoneda("");
             setNombre("");
             setMonto_total(0);
             setFecha_inicio("");
             setFrecuencia("");
+            setTiempoPuja(0);
           }}
         >
           <h2>Crea tu Juego!</h2>
@@ -49,20 +65,32 @@ const CreateGameModal = ({ open, onClose, createGame }) => {
                   }}
                 />
               </div>
-              <div className="column-align">
+              <div className="column-align margin-bottom-25">
                 <label>Frecuencia del Juego</label>
-                <select
+                <input
                   name="frecuencia"
                   className="frecuencia game-input"
                   value={frecuencia}
+                  type="number"
+                  placeholder="10"
                   onChange={(e) => {
                     setFrecuencia(e.target.value);
                   }}
-                >
-                  <option>Semanalmente</option>
-                  <option>Mensualmente</option>
-                  <option>Cada 5 días</option>
-                </select>
+                />
+              </div>
+
+              <div className="column-align ">
+                <label>Tiempo para la puja</label>
+                <input
+                  name="tiempo_puja"
+                  className="frecuencia game-input"
+                  value={tiempoPuja}
+                  type="number"
+                  placeholder="10"
+                  onChange={(e) => {
+                    setTiempoPuja(e.target.value);
+                  }}
+                />
               </div>
             </div>
 
@@ -70,7 +98,7 @@ const CreateGameModal = ({ open, onClose, createGame }) => {
               <div>
                 <label>Monto</label>
                 <div className="currency-monto">
-                  <select
+                  {/* <select
                     name="currency"
                     className="currency"
                     value={moneda}
@@ -83,10 +111,11 @@ const CreateGameModal = ({ open, onClose, createGame }) => {
                     </option>
                     <option value="BS">BS</option>
                     <option value="US">US</option>
-                  </select>
+                  </select> */}
                   <input
                     type="number"
                     placeholder="456"
+                    value={monto_total}
                     onChange={(e) => {
                       setMonto_total(e.target.value);
                     }}

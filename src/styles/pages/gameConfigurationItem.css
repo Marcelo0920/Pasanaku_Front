@@ -27,7 +27,7 @@
 }
 
 .margin-20 {
-  margin: 20px;
+  margin: 10px;
 }
 
 .player-item {
@@ -117,4 +117,12 @@
 
 .send-button:hover {
   cursor: pointer;
+}
+
+.flex-row {
+  display: flex;
+}
+
+.flex-row > button {
+  margin: 3px;
 }

@@ -51,9 +51,11 @@ export const obtenerInvitados = (id) => async (dispatch) => {
       `https://back-pasanaku.onrender.com/api/jugadores/juegos/${id}/invitados`
     );
 
+    console.log(res.data.data[0].invitados_juegos);
+
     dispatch({
       type: GET_INVITADOS,
-      payload: res.data.data,
+      payload: res.data.data[0].invitados_juegos,
     });
   } catch (error) {
     dispatch({
