@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { obtenerInvitados } from "../actions/invitacion";
-import { crearInvitado } from "../actions/invitacion";
 import { sendInvitation } from "../actions/invitacion";
 import { updateGame } from "../actions/juego";
+import { getJuego } from "../actions/juego";
 import { startGame } from "../actions/juego";
 import PropTypes from "prop-types";
 
@@ -16,14 +16,16 @@ const GameConfigurationItem = ({
   obtenerInvitados,
   sendInvitation,
   updateGame,
+  getJuego,
   startGame,
   invitationReducer: { invitados, loading },
+  juego: { juego },
 }) => {
   const [moneda, setMoneda] = useState("");
   const [nombre, setNombre] = useState("");
-  const [monto_total, setMonto_total] = useState(0);
+  const [monto_total, setMonto_total] = useState("");
   const [fecha_inicio, setFecha_inicio] = useState("");
-  const [frecuencia, setFrecuencia] = useState(0);
+  const [frecuencia, setFrecuencia] = useState("");
   const [tiempoPuja, setTiempoPuja] = useState(0);
 
   const [invitadosList, setInvitadosList] = useState([]);
@@ -39,7 +41,18 @@ const GameConfigurationItem = ({
 
   useEffect(() => {
     obtenerInvitados(id[2]);
-  }, [obtenerInvitados]);
+    getJuego(id[2]);
+  }, [obtenerInvitados, getJuego]);
+
+  useEffect(() => {
+    if (juego) {
+      setNombre(juego.nombre);
+      setMonto_total(juego.monto_total);
+      setFecha_inicio(juego.fecha_inicio);
+      console.log(fecha_inicio);
+      setFecha_inicio(juego.lapso_turnos_dias);
+    }
+  }, [juego]);
 
   useEffect(() => {
     // Esto se ejecutará cada vez que invitados cambie
@@ -211,6 +224,7 @@ const GameConfigurationItem = ({
 
 const mapStateToProps = (state) => ({
   invitationReducer: state.invitationReducer,
+  juego: state.juego,
 });
 
 GameConfigurationItem.propTypes = {
@@ -219,10 +233,13 @@ GameConfigurationItem.propTypes = {
   sendInvitation: PropTypes.func.isRequired,
   updateGame: PropTypes.func.isRequired,
   startGame: PropTypes.func.isRequired,
+  getJuego: PropTypes.func.isRequired,
+  juego: PropTypes.object.isRequired,
 };
 
 export default connect(mapStateToProps, {
   obtenerInvitados,
+  getJuego,
   startGame,
   updateGame,
   sendInvitation,

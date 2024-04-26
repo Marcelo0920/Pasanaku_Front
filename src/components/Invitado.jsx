@@ -6,7 +6,7 @@ const Invitado = ({ invitado }) => {
       <p>{invitado.invitado.correo}</p>
       <div className="player-options">
         <button>
-          <p>Agregar Invitado</p>
+          <p>Editar</p>
         </button>
         <p className="player-delete">X</p>
       </div>

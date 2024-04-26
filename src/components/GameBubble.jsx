@@ -16,7 +16,7 @@ const GameBubble = ({ juego }) => {
         <h4 className="game-title">{juego.nombre}</h4>
         <div className="game-bubble-stats">
           <FaRegUser />
-          <p>8</p>
+          <p>{juego.jugadores_juegos.length}</p>
         </div>
       </div>
     </div>

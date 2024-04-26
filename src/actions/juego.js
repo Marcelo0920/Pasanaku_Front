@@ -31,13 +31,10 @@ export const createGame =
     const body = JSON.stringify({
       nombre,
       /* moneda, */
-      monto_total,
       fecha_inicio,
+      monto_total,
       lapso_turnos_dias,
-      tiempo_puja_seg,
     });
-
-    console.log(body);
 
     try {
       const { data } = await axios.post(
@@ -45,6 +42,8 @@ export const createGame =
         body,
         config
       );
+
+      console.log(data);
 
       dispatch({
         type: POST_JUEGO_SUCCESS,
@@ -137,6 +136,27 @@ export const getJuegos = () => async (dispatch) => {
   }
 };
 
+//GET JUEGO
+export const getJuego = (id) => async (dispatch) => {
+  try {
+    const res = await axios.get(
+      `https://back-pasanaku.onrender.com/api/jugadores/juegos/${id}`
+    );
+
+    console.log(res.data.data);
+
+    dispatch({
+      type: GET_JUEGO,
+      payload: res.data.data,
+    });
+  } catch (error) {
+    dispatch({
+      type: JUEGO_ERROR,
+      payload: error,
+    });
+  }
+};
+
 //START GAME
 export const startGame = (id) => async (dispatch) => {
   try {
@@ -148,12 +168,17 @@ export const startGame = (id) => async (dispatch) => {
 
     console.log(id);
 
+    const tiempo_puja_seg = 240;
+
+    body = Number(tiempo_puja_seg);
+
     const res = await axios.post(
-      `https://back-pasanaku.onrender.com/api/jugadores/juegos/${id}/iniciar`,
+      `https://back-pasanaku.onrender.com/api/jugadores/juegos/${id}/turnos/iniciar`,
+      body,
       config
     );
 
-    console.log(res.data.data);
+    console.log(res);
 
     dispatch({
       type: POST_JUEGO_SUCCESS,

@@ -24,7 +24,7 @@ export const crearInvitado = (correo, nombre, telf, id) => async (dispatch) => {
 
   try {
     const res = await axios.post(
-      `https://back-pasanaku.onrender.com/api/jugadores/juegos/${id}/invitados`,
+      `https://back-pasanaku.onrender.com/api/jugadores/1/juegos/${id}/invitados`,
       body,
       config
     );
