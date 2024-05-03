@@ -16,15 +16,6 @@ const CreateGameModal = ({ open, onClose, createGame }) => {
   const [frecuencia, setFrecuencia] = useState(0);
   const [tiempoPuja, setTiempoPuja] = useState(0);
 
-  console.log(
-    nombre,
-    moneda,
-    monto_total,
-    fecha_inicio,
-    frecuencia,
-    tiempoPuja
-  );
-
   return (
     <div className="overlay">
       <div className="modalContainer">
@@ -75,20 +66,6 @@ const CreateGameModal = ({ open, onClose, createGame }) => {
                   placeholder="10"
                   onChange={(e) => {
                     setFrecuencia(e.target.value);
-                  }}
-                />
-              </div>
-
-              <div className="column-align ">
-                <label>Tiempo para la puja</label>
-                <input
-                  name="tiempo_puja"
-                  className="frecuencia game-input"
-                  value={tiempoPuja}
-                  type="number"
-                  placeholder="10"
-                  onChange={(e) => {
-                    setTiempoPuja(e.target.value);
                   }}
                 />
               </div>

@@ -24,7 +24,7 @@ export const crearInvitado = (correo, nombre, telf, id) => async (dispatch) => {
 
   try {
     const res = await axios.post(
-      `https://back-pasanaku.onrender.com/api/jugadores/1/juegos/${id}/invitados`,
+      `https://back-pasanaku.onrender.com/api/jugadores/juegos/${id}/invitados`,
       body,
       config
     );
@@ -85,6 +85,8 @@ export const sendInvitation = (idsInvitados, id) => async (dispatch) => {
       config
     );
 
+    console.log(data);
+
     dispatch({
       type: POST_JUEGO_SUCCESS,
       payload: data.message,
@@ -92,7 +94,7 @@ export const sendInvitation = (idsInvitados, id) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: INVITATION_ERROR,
-      payload: error.response.data.message,
+      payload: error,
     });
   }
 };

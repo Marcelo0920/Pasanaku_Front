@@ -10,9 +10,9 @@ import PropTypes from "prop-types";
 import "../styles/pages/gameConfigurationItem.css";
 import Invitado from "../components/Invitado";
 import GuestsList from "../components/modals/GuestsList";
+import InitiateGame from "../components/modals/InitiateGame";
 
 const GameConfigurationItem = ({
-  crearInvitado,
   obtenerInvitados,
   sendInvitation,
   updateGame,
@@ -33,10 +33,16 @@ const GameConfigurationItem = ({
   let id = window.location.pathname.split("/");
 
   const [openModal, setOpenModal] = useState(false);
+  const [openSecondModal, setOpenSecondModal] = useState(false);
 
   function handleModal() {
     console.log("click");
     setOpenModal(!openModal);
+  }
+
+  function handleSecondModal() {
+    console.log("clickk");
+    setOpenSecondModal(!openSecondModal);
   }
 
   useEffect(() => {
@@ -68,6 +74,12 @@ const GameConfigurationItem = ({
         open={openModal}
         id={id[2]}
         onClose={() => setOpenModal(false)}
+      />
+
+      <InitiateGame
+        open={openSecondModal}
+        id={id[2]}
+        onClose={() => setOpenSecondModal(false)}
       />
       <div className="game-configuration-item">
         <h2>Configuracion de Juego</h2>
@@ -209,10 +221,11 @@ const GameConfigurationItem = ({
           </div>
         </div>
         <button
-          onClick={(e) => {
+          /* onClick={(e) => {
             console.log("clickeado");
             startGame(id[2]);
-          }}
+          }} */
+          onClick={(e) => handleSecondModal()}
           className="send-button"
         >
           Empezar Juego

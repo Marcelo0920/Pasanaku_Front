@@ -36,6 +36,8 @@ export const createGame =
       lapso_turnos_dias,
     });
 
+    console.log(body);
+
     try {
       const { data } = await axios.post(
         "https://back-pasanaku.onrender.com/api/jugadores/1/juegos",
@@ -49,8 +51,6 @@ export const createGame =
         type: POST_JUEGO_SUCCESS,
         payload: data.message,
       });
-
-      console.log(data);
     } catch (error) {
       dispatch({
         type: JUEGO_ERROR,
@@ -92,8 +92,6 @@ export const updateGame =
 
     console.log(id);
 
-    console.log(body);
-
     try {
       const { data } = await axios.put(
         `https://back-pasanaku.onrender.com/api/jugadores/1/juegos/${id}`,
@@ -105,8 +103,6 @@ export const updateGame =
         type: POST_JUEGO_SUCCESS,
         payload: data.message,
       });
-
-      console.log(data);
     } catch (error) {
       dispatch({
         type: JUEGO_ERROR,
@@ -122,11 +118,11 @@ export const getJuegos = () => async (dispatch) => {
       "https://back-pasanaku.onrender.com/api/jugadores/1/juegos"
     );
 
-    console.log(res.data.data);
+    //console.log(res.data.data[0].jugadores_juegos);
 
     dispatch({
       type: GET_JUEGOS,
-      payload: res.data.data,
+      payload: res.data.data[0].jugadores_juegos,
     });
   } catch (error) {
     dispatch({
@@ -143,8 +139,6 @@ export const getJuego = (id) => async (dispatch) => {
       `https://back-pasanaku.onrender.com/api/jugadores/juegos/${id}`
     );
 
-    console.log(res.data.data);
-
     dispatch({
       type: GET_JUEGO,
       payload: res.data.data,
@@ -158,36 +152,44 @@ export const getJuego = (id) => async (dispatch) => {
 };
 
 //START GAME
-export const startGame = (id) => async (dispatch) => {
-  try {
-    const config = {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    };
+export const startGame =
+  (id, tiempo_puja_seg, tiempo_inicio_pago_seg, tiempo_pago_seg) =>
+  async (dispatch) => {
+    try {
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      };
 
-    console.log(id);
+      tiempo_puja_seg = Number(tiempo_puja_seg);
+      tiempo_inicio_pago_seg = Number(tiempo_inicio_pago_seg);
+      tiempo_pago_seg = Number(tiempo_pago_seg);
 
-    const tiempo_puja_seg = 240;
+      const body = JSON.stringify({
+        tiempo_puja_seg,
+        tiempo_inicio_pago_seg,
+        tiempo_pago_seg,
+      });
 
-    body = Number(tiempo_puja_seg);
+      console.log(body);
 
-    const res = await axios.post(
-      `https://back-pasanaku.onrender.com/api/jugadores/juegos/${id}/turnos/iniciar`,
-      body,
-      config
-    );
+      const res = await axios.post(
+        `https://back-pasanaku.onrender.com/api/jugadores/juegos/${id}/turnos/iniciar`,
+        body,
+        config
+      );
 
-    console.log(res);
+      console.log(res);
 
-    dispatch({
-      type: POST_JUEGO_SUCCESS,
-      payload: res.data.data,
-    });
-  } catch (error) {
-    dispatch({
-      type: JUEGO_ERROR,
-      payload: error,
-    });
-  }
-};
+      dispatch({
+        type: POST_JUEGO_SUCCESS,
+        payload: res.data.data,
+      });
+    } catch (error) {
+      dispatch({
+        type: JUEGO_ERROR,
+        payload: error,
+      });
+    }
+  };
